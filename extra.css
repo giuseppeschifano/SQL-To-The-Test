@@ -1,0 +1,38 @@
+
+
+ /* Google font*/
+ 
+ @import url('https://fonts.googleapis.com/css?family=Six+Caps');
+
+ @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+ * {
+  margin: 0;
+  padding: 0;
+  
+ }
+
+ body {
+  font-family: 'Montserrat', 'Arial', 'sans-serif',  'serif';
+  color: darkgrey;
+  background-color: lightblue; 
+  line-height: 1.6;
+  margin-left: 10rem;
+ }
+
+h3 {
+    padding: 20px 50px;
+    text-align: center;
+}
+
+.container-fluid {
+    color: white;
+    font-weight: bolder;
+    font-family: Montserrat;
+}
+ 
+.hero {
+    background-color: lightblue;
+}
+
