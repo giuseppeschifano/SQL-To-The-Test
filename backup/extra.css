@@ -19,13 +19,11 @@
   background-color: lightblue; 
   line-height: 1.6;
   margin-left: 10rem;
-  
  }
 
 h3 {
     padding: 20px 50px;
     text-align: center;
-
 }
 
 .container-fluid {
@@ -36,6 +34,5 @@ h3 {
  
 .hero {
     background-color: lightblue;
-    
 }
 

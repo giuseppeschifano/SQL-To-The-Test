@@ -1,17 +1,12 @@
 
 <?php
+
 // including the database connection file
 include_once("header.php");
-?>
-
-<?php 
+ 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-?>
-
-
-<?php
 
 if(isset($_POST['update']))
 {    
@@ -25,22 +20,21 @@ if(isset($_POST['update']))
     // checking empty fields
     if(empty($user) || empty($first) || empty($last)) {    
             
-        if(empty($user)) {
-            echo "<font color='red'>Username field is empty.</font><br/>";
-        }
-        if(empty($first)) {
-            echo "<font color='red'>Firstname field is empty.</font><br/>";
-        }
-        if(empty($last)) {
-            echo "<font color='red'>Lastname field is empty.</font><br/>";
-        } 
+            if(empty($user)) {
+                echo "<font color='red'>Username field is empty.</font><br/>";
+            }
+            if(empty($first)) {
+                echo "<font color='red'>Firstname field is empty.</font><br/>";
+            }
+            if(empty($last)) {
+                echo "<font color='red'>Lastname field is empty.</font><br/>";
+            } 
 
-    } else {    
+        } else {    
 
         //updating the table
 
-        $sql = "UPDATE users SET username=:username, firstname=:firstname, lastname=:lastname, emailaddress=:emailaddress  WHERE id=:id";
-        
+        $sql = "UPDATE users SET username=:username, firstname=:firstname, lastname=:lastname WHERE id=:id";
         $query = $handler->prepare($sql);
                 
         $query->bindparam(':id', $id);
@@ -52,27 +46,26 @@ if(isset($_POST['update']))
         $query->execute();
     
         //display success message
-        echo "<p align='center' > <font color='green'>Data changed successfully.";
-        echo "<br/> <p align='center' > <a href='index2.php' >View Result</a>";
+        echo "<font color='green'>Data changed successfully.";
+        echo "<br/><a href='index.php'>View Result</a>";
+
+        //redirecting to the display page. In our case, it is index.php
+        //header("Location: index.php");
     }
 }
 
 
-//getting id from url
-
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-}
-
+//getting id 
+$id = $_GET['id'];
+ 
 
 //selecting data associated with this particular id
 
 $sql = "SELECT * FROM users WHERE id=:id";
 $query = $handler->prepare($sql);
 
-
 $query->execute(array(':id' => $id));
-
+ 
 while($row = $query->fetch(PDO::FETCH_ASSOC))
 {
     $id = $row['id'];
@@ -102,56 +95,43 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
 <body>
 
 <div class="container-fluid bg-primary">
-    <h3>UPDATE USERS</h3>
+<h3>EDIT OR DELETE USERS</h3>
 </div>
-
     
-<div class="hero">
-
+<div class="container">
+<div class="row d-flex justify-content-center" >
     <hr>
-    <a href="index2.php" class="btn btn-secondary ml-5" role="button" >GO BACK</a>
+    
+    <a href="index.php" class="btn btn-primary ml-5" role="button" >Go Back</a>
     <br>
     <hr>
-
-<!-- <div class="row d-flex flex-column" > -->
-
-
-    <form name="form1" method="post" class = "d-flex flex-column align-items-center p-3" action="account.php">
-
-        <table class="table-bordered">
-        
+    
+    <form name="form1" method="post" class = "d-flex flex-column align-items-center" action="account.php">
+        <table border="0">
             <tr> 
-                <td class="bg-light pl-2 ">id</td>
-                <td><input type="text" name="id" readonly class="form-control-plaintext  
-                bg-light" value="<?php echo $id;?>"></td>
-            </tr>
-            <tr> 
-                <td class="bg-warning pl-2">username</td>
+                <td>username</td>
                 <td><input type="text" name="username" value="<?php echo $user;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">firstname</td>
+                <td>firstname</td>
                 <td><input type="text" name="firstname" value="<?php echo $first;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">lastname</td>
+                <td>lastname</td>
                 <td><input type="text" name="lastname" value="<?php echo $last;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">e-mail addres</td>
+                <td>e-mail addres</td>
                 <td><input type="text" name="emailaddress" value="<?php echo $email;?>"></td>
             </tr>
             <tr>
-                <td><input type="hidden" name="id" value="<?php echo $_GET['id'];?>"></td>
-                
-                <td><input type="submit" class="btn btn-primary mt-5 ml-3" role="button" name="update" value="UPDATE" ></td>                
+                <td><input type="hidden" name="id" value=<?php echo $_GET['id'];?>></td>
+                <td><input type="submit" name="update" value="Update"></td>
             </tr>
-            
         </table>
     </form>
 
-
-
+</div>
 </div>
 
 </body>

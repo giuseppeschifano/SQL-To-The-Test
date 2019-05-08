@@ -14,7 +14,7 @@ include("header.php");
     $query->execute(array(':id' => $id));
     
     //redirecting to the display page (index.php in our case)
-    header("Location:index2.php");
+    header("Location:index.php");
 
 ?>
 

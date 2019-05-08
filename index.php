@@ -1,9 +1,6 @@
 
 <?php
-include_once('header.php');
-
-//fetching data in descending order (last entry first)
-$result = $handler->query("SELECT * FROM users ORDER BY username ASC");
+require_once 'header.php';
 ?>
 
 <?php
@@ -12,6 +9,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,70 +25,82 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Account.PHP</title>
+    <title>Login.PHP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
+
+<?php
+if (isset($_SESSION['errorPWD'])) {
+echo "<p align='center' > <font color='red' size='4pt'>ERROR: " . $_SESSION['errorPWD'] . "<br>";    
+}
+?>
+
+<?php
+if (isset($_SESSION['errorUSER'])) {
+echo "<p align='center' > <font color='red' size='4pt'>ERROR: " . $_SESSION['errorUSER'] . "<br>";
+}
+?>
+
+<?php
+// remove all session variables
+session_unset(); 
+
+// destroy the session 
+session_destroy(); 
+?>
+
 <div class="container-fluid bg-primary">
-<h3>EDIT OR DELETE USERS</h3>
+    <h3>START PAGE</h3>
+    <h5 class="text-center text-warning font-weight-bolder" >- - - If you already have an account SIGN IN, else SIGN UP - - -</h5>
+
+    <div class="d-flex flex-column align-items-end mr-5">
+    <a href="register2.php" class="btn btn-light " role="button">SIGN UP</a>
+    </div>
+    <br>
 </div>
 
 
-<div class="hero">
+<div class="hero"> 
 
-<!-- <div class="row d-flex flex-column"> -->
+<div class="row d-flex flex-column">
 
+    <form action="auth.php" method="POST" class = "d-flex flex-column align-items-center">
 
-    <hr>
-	
-	<a href="register.php"  class="btn btn-primary ml-5" role="button">Register New Users </a>
-	<br>
-	<hr/>
- 
-    <table width='90%' border=0 class = "d-flex flex-column align-items-center table-bordered p-1">
-    <thead class="thead-info m-1">
+        <div class="input-group col-4 m-4">
+        <div class="input-group-prepend">
+        <button class="btn btn-success" type="button">Username</button>
+        </div>
+        <input type="text" class="form-control"  name="user" placeholder="Username" />
+        </div>
 
-    <tr bgcolor='lightblue'>
+        <div class="input-group col-4 m-3">
+        <div class="input-group-prepend">
+        <button class="btn btn-success" type="button">Password</button>
+        </div>
+        <input type="password" class="form-control" name="pass" />
+        </div>
+
+        <!-- <div class="input-group col-4 m-3">
+        <div class="input-group-prepend">
+        <button class="btn btn-success" type="button">New PWD</button>
+        </div>
+        <input type="password" class="form-control" name="chgpwd" />
+        </div> -->
         
-        <td>Id</td>
-        <td>Username</td>
-        <td>Firstname</td>
-        <td>Lastname</td>
-        <td>Email-Addres</td>
-        <td>Edit/Delete</td>
+        <div class="form-group m-3"> 
+        <label for="formGroupExampleInput"></label>
+        <input type="submit" class="btn btn-primary" value="SIGN IN" />
+        </div>
 
-	</tr>
-	
-    <?php   
-	  
-		while($row = $result->fetch(PDO::FETCH_ASSOC)) {   
-			     
-            echo "<tr>";
-            echo "<td>".$row['id']."</td>";
-			echo "<td>".$row['username']."</td>";
-			echo "<td>".$row['firstname']."</td>";
-			echo "<td>".$row['lastname']."</td>";
-			echo "<td>".$row['emailaddress']."</td>";
-			
-			echo "<td><a href=\"account.php?id=$row[id]\">Edit</a> | 
-					<a href=\"delete.php?id=$row[id]\" 
-					onClick=\"return confirm('Are you sure you want to delete this record?')\">Delete</a></td>";	
-			echo "</tr>";
-		}
+        
 
-	?>
+    </form>
 
-
-<!-- </div> -->
+</div>
 </div>  
-
-    </thead>
-    </table>
 
 </body>
 </html>
-
-
-
 

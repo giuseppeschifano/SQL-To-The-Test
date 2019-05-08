@@ -9,32 +9,14 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 
-
 <?php
 
-// checking PWD fields
-if(empty($pass) || empty($pwdconfirm) || empty($user) || ( (!empty($pass)) != (!empty($pwdconfirm))) ) {    
-            
-        if(empty($user)) {
-            echo "<font color='red'>User field is empty.</font><br/>";
-        } 
-        if(empty($pass)) {
-            echo "<font color='red'>New Password field is empty.</font><br/>";
-        }
-        if(empty($pwdconfirm)) {
-            echo "<font color='red'>Confirm Password field is empty.</font><br/>";
-        } 
-        if((!empty($pass)) != (!empty($pwdconfirm))) {
-            echo "<align='center' ><font color='red'>Confirm Password Does Not Match Password field.</font><br/>";
-        }
-
-    if( isset($_POST['user']) && isset($_POST['pass']) && isset($_POST['pwdconfirm']) &&  ($_POST['pass'] = $_POST['pwdconfirm']) ) {
+if(isset($_POST['user']) && isset($_POST['pass'])){
 
 		$user = $_POST['user'];
         $first = $_POST['firstname'];
         $last = $_POST['lastname'];
         $email = $_POST['emailaddress'];
-        
 
         $pass = $_POST['pass'];
         $pass = password_hash($pass, PASSWORD_DEFAULT);
@@ -42,10 +24,10 @@ if(empty($pass) || empty($pwdconfirm) || empty($user) || ( (!empty($pass)) != (!
 		$query = $handler->prepare("SELECT * FROM users WHERE username='$user'");
         
         $query->execute([$user]);
-        $userX = $query->fetchColumn();
-        
+		$userX = $query->fetchColumn();
 
         //check if there is already an entry for that username
+
 		if($userX) {
             
             echo "<p align='center' > <font color='red' size='4pt'> Username already exists !!";
@@ -54,12 +36,10 @@ if(empty($pass) || empty($pwdconfirm) || empty($user) || ( (!empty($pass)) != (!
 			$query = $handler->prepare("INSERT INTO users(username, firstname, lastname, emailaddress, password) VALUES ('$user', '$first', '$last', '$email', '$pass')");
 			$query->execute();
 
-            header("location:index2.php");
+            header("location:index.php");
             
 		}
     }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -80,22 +60,15 @@ if(empty($pass) || empty($pwdconfirm) || empty($user) || ( (!empty($pass)) != (!
 <body>
    
 <div class="container-fluid bg-primary">
-<h3>REGISTER NEW USERS</h3>
+<h3>Register New User</h3>
 </div>
 
 <div class="hero">
+<div class = "row d-flex flex-column">
 
-    <br>
-    <a href="index2.php" class="btn btn-secondary ml-5" role="button" >GO BACK</a>
-	<br>
-	<hr/>
+    <form action="register.php" method="POST" class = "d-flex flex-column align-items-center">
 
-
-    <div class = "row d-flex flex-column">
-
-        <form action="register.php" method="POST" class = "d-flex flex-column align-items-center">
-
-        <div class="input-group col-4 m-2">
+        <div class="input-group col-4 m-3">
         <div class="input-group-prepend">
         <button class="btn btn-success" type="button">Username</button>
         </div>
@@ -137,16 +110,20 @@ if(empty($pass) || empty($pwdconfirm) || empty($user) || ( (!empty($pass)) != (!
         <input type="password" class="form-control" name="pwdconfirm"  placeholder="confirm pwd" aria-label="" aria-describedby="basic-addon1">
         </div>
 
+        <br/>
 
         <div class="form-group m-2">
-        <input type="submit" value="ADD USER" class="btn btn-primary"/>
+        <input type="submit" value="REGISTER" class="btn btn-primary"/>
+        </div>
+
+        <div class="form-group m-2">
+        <a href="login.php"  class="btn btn-secondary" role="button">Go Back</a>
         </div>
         
-        </form>
-    </div>
+    </form>
 
 </div>
-
+</div>
 </body>
 </html>
 
