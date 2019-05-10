@@ -11,11 +11,13 @@ error_reporting(E_ALL);
 
 <?php
 session_start();
+$name = $_SESSION['login_user'];
+$id = $_SESSION['id_user'];
 ?>
 
 <?php
 	if(!isset($_COOKIE['loggedin'])){
-		header("location:login.php");
+		header("location:home.php");
 	}
 ?>
 
@@ -38,33 +40,50 @@ session_start();
 <body>
 
 <div class="container-fluid bg-primary">
-
-<h3></h3>
-
-<?php
-if (isset($_SESSION['login_user'])) {
-echo "<p align='center' > <font color='white' size='5pt'>Welcome, " . $_SESSION['login_user'] . "<br>";
-}
-?>
+<br>
 
 <?php
-// remove all session variables
-session_unset(); 
-
-// destroy the session 
-session_destroy(); 
+	if (isset($_SESSION['login_user'])) {
+		echo "<p align='center' > <font color='orange' size='5pt'>Welcome, " . $_SESSION['login_user'] . "<br>";
+	}
 ?>
 
+<br>
 </div>
 
 	<div class="hero">
-	<div class="row d-flex flex-column align-items-center">
-	<div class="form-group m-3">
-	<a href="login.php"  class="btn btn-secondary" role="button">Go Back</a>
+
+		<br>
+		<a href="index.php" class="btn btn-secondary ml-5" role="button" >GO BACK</a>
+		<br>
+		<hr/>
+
+		<div class="row d-flex flex-column align-items-center">
+			<div class="form-group m-3">
+				<a href="index2.php"  class="btn btn-success" role="button">OPEN APPLICATION</a>
+			</div>
+		</div>
+
+		<!-- FOUT: om session parameter door te geven, geen <div> maar echo...!! -->
+			<!-- <div class="row d-flex flex-column align-items-center">
+				<div class="form-group m-3">
+					<a href="password.php?"  class="btn btn-primary" role="button">CHANGE PASSWORD</a>
+				</div>
+			</div> -->
+
+		<br>
+
+<?php
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:5px' class='btn btn-warning form-control col-2 m-5' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
+?>
+
+		<br>
+
 	</div>
-	</div>
-	</div>
+
 
 </body>
 </html>
+
+
 
