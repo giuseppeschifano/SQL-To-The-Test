@@ -2,7 +2,7 @@
 <?php
 include_once('header.php');
 
-//fetching data in descending order (last entry first)
+//fetching data in descending order 
 $result = $handler->query("SELECT * FROM users ORDER BY username ASC");
 ?>
 
@@ -58,6 +58,7 @@ error_reporting(E_ALL);
             <td>Firstname</td>
             <td>Lastname</td>
             <td>Email-Addres</td>
+            <td>Active 0/1</td>
             <td>Edit | Delete</td>
 
         </tr>
@@ -72,10 +73,14 @@ error_reporting(E_ALL);
                 echo "<td>". "&nbsp" .$row['firstname']."</td>";
                 echo "<td>". "&nbsp" .$row['lastname']."</td>";
                 echo "<td>". "&nbsp" .$row['emailaddress']."</td>";
+                echo "<td>". "&nbsp" .$row['active']."</td>";
+
                 
-                echo "<td><a href=\"account.php?id=$row[id]\">Edit</a> | 
+                echo "<td>
+                        <a href=\"account.php?id=$row[id]\">Edit</a> | 
                         <a href=\"delete.php?id=$row[id]\" 
-                        onClick=\"return confirm('Are you sure you want to delete this record?')\">Delete</a></td>";	
+                        onClick=\"return confirm('Are you sure you want to delete this record?')\">Delete</a>
+                     </td>";	
                 echo "</tr>";
             }
         ?>

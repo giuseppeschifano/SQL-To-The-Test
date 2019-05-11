@@ -32,7 +32,7 @@ session_start();
     <title>Login.PHP</title>
 
 </head>
-<body id="body" class="dark-mode">
+<body id="body" class="dark-light">
 
 
 <?php
@@ -57,7 +57,7 @@ session_destroy();
 
 <div class="container-fluid bg-primary">
     
-<h3>START PAGE</h3>
+    <h3>START PAGE</h3>
 
     <h5 class="text-center text-warning font-weight-bolder" >- - - If you already have an account SIGN IN, else SIGN UP - - -</h5>
     

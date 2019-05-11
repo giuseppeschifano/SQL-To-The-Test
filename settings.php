@@ -24,7 +24,7 @@ if(isset($_POST['update']))
 {   
 	$id=$_POST['id'];
 	$user=$_POST['username'];
-	$sett1=$_POST['settDL'];
+	$sett1=$_POST['settingDL'];
 
 
 	// checking fields
@@ -37,13 +37,11 @@ if(isset($_POST['update']))
 		$query = $handler->prepare($sql); 
 
 		$query->execute(array(':id' => $id));
-
 		// $query->execute([$id]);
 
 		$idX = $query->fetchColumn();
 
 		//check if there is already an entry for that id 
-
 		if($idX) {
 
 			while($row = $query->fetch(PDO::FETCH_ASSOC)){
@@ -74,7 +72,7 @@ if(isset($_POST['update']))
 }
 
 
-//selecting data associated with this particular id
+//selecting users - data associated with this particular id
 $sql = "SELECT * FROM users WHERE id=:id";
 $query = $handler->prepare($sql); 
 $query->execute(array(':id' => $id));
@@ -83,6 +81,18 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
 	$id = $row['id'];
 	$user = $row['username'];	
 }
+
+
+//selecting settings - data associated with this particular id
+$sql = "SELECT * FROM settings WHERE id=:id";
+$query = $handler->prepare($sql); 
+$query->execute(array(':id' => $id));
+
+while($row = $query->fetch(PDO::FETCH_ASSOC)){
+	$id = $row['id'];
+	$sett1 = $row['settingDL'];	
+}
+
 
 ?>
 
@@ -105,7 +115,7 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
 	
 </head>	
 
-<body id="body" class="dark-mode">
+<body id="body" class="dark-light">
 
 <div class="container-fluid bg-primary">
 
@@ -113,7 +123,7 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
 
 <?php
 	if (isset($_SESSION['login_user'])) {
-		echo "<p align='center' > <font color='white' size='4pt'>changing settings for username " . $_SESSION['login_user'] . " - idnr " . $_SESSION['id_user'] . "<br>";
+		echo "<p align='center' > <font color='black' size='3pt'>changing settings for username " . $_SESSION['login_user'] . " - idnr " . $_SESSION['id_user'] . "<br>";
 	}
 ?>
 
@@ -136,20 +146,20 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
 		<table class="table-bordered">
 
 			<tr> 
-				<td class="bg-success pl-2 ">id</td>
+				<td class="bg-light pl-2 ">id</td>
 				<td><input type="text" name="id" readonly class="form-control-plaintext  
-				bg-success pl-2" value="<?php echo $id;?>"></td>
+				bg-light pl-2" value="<?php echo $id;?>"></td>
 			</tr>
 
 			<tr> 
-				<td class="bg-success pl-2">username</td>
+				<td class="bg-light pl-2">username</td>
 				<td><input type="text" name="username" readonly class="form-control-plaintext  
-				bg-success pl-2" value="<?php echo $user;?>"></td>
+				bg-light pl-2" value="<?php echo $user;?>"></td>
 			</tr>
 
 			<tr> 
-				<td class="bg-warning pl-2">setting1</td>
-				<td><input type="tinyint" class="bg-warning pl-2" name="settDL" value="<?php echo $sett1;?>"></td>
+				<td class="bg-warning pl-2">settingDL</td>
+				<td><input type="tinyint" class="bg-warning pl-2" name="settingDL" value="<?php echo $sett1;?>"></td>
 			</tr>
 		</table>
 

@@ -60,22 +60,18 @@ $id = $_SESSION['id_user'];
 
 		<br>
 		<a href="index.php" class="btn btn-secondary ml-5" role="button" >GO BACK</a>
-		<!-- <br>
-		<hr/>
 
-		<div class="row d-flex flex-column align-items-center">
-		<div class="form-group m-3"> -->
 		<a href="index2.php"  class="btn btn-success" role="button">GO TO USERS PAGE</a>
-		<!-- </div>
-		</div> -->
 
 		<!--  om session parameters door te geven, geen <div> gebruiken maar echo...!! -->
 
 		<?php
 
-		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:5px' class='btn btn-success form-control col-2 m-5' href=\"settings.php?id=$id\">GO TO SETTINGS PAGE</a>";
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-warning form-control col-2 m-2' href=\"settings.php?id=$id\">GO TO SETTINGS</a>";
 
-		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:5px' class='btn btn-danger form-control col-2 m-5' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-secondary form-control col-2 m-2' href=\"profile.php?id=$id\">GO TO PROFILE PAGE</a>";
+
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-danger form-control col-2 m-2' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
 
 		?>
 

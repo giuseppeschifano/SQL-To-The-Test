@@ -20,7 +20,7 @@ if(isset($_POST['update']))
     $first=$_POST['firstname'];
     $last=$_POST['lastname'];  
     $email=$_POST['emailaddress'];
-      
+    $act=$_POST['active'];
 
     // checking empty fields
     if(empty($user) || empty($first) || empty($last)) {    
@@ -39,7 +39,7 @@ if(isset($_POST['update']))
 
         //updating the table
 
-        $sql = "UPDATE users SET username=:username, firstname=:firstname, lastname=:lastname, emailaddress=:emailaddress  WHERE id=:id";
+        $sql = "UPDATE users SET username=:username, firstname=:firstname, lastname=:lastname, emailaddress=:emailaddress, active=:active  WHERE id=:id";
         
         $query = $handler->prepare($sql);
                 
@@ -48,6 +48,7 @@ if(isset($_POST['update']))
         $query->bindparam(':firstname', $first);
         $query->bindparam(':lastname', $last);
         $query->bindparam(':emailaddress', $email);
+        $query->bindparam(':active', $act);
 
         $query->execute();
     
@@ -78,6 +79,7 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
     $first = $row['firstname'];
     $last = $row['lastname'];
     $email = $row['emailaddress'];
+    $act = $row['active'];
 }
 ?>
 
@@ -126,21 +128,26 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
                 bg-light" value="<?php echo $id;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">username</td>
+                <td class="bg-light pl-2">username</td>
                 <td><input type="text" name="username" value="<?php echo $user;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">firstname</td>
+                <td class="bg-light pl-2">firstname</td>
                 <td><input type="text" name="firstname" value="<?php echo $first;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">lastname</td>
+                <td class="bg-light pl-2">lastname</td>
                 <td><input type="text" name="lastname" value="<?php echo $last;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">e-mail addres</td>
+                <td class="bg-light pl-2">e-mail addres</td>
                 <td><input type="text" name="emailaddress" value="<?php echo $email;?>"></td>
             </tr>
+            <tr> 
+                <td class="bg-light pl-2">active 0/1</td>
+                <td><input type="tinyint" name="active" value="<?php echo $act;?>"></td>
+            </tr>
+
             <tr>
                 <td><input type="hidden" name="id" value="<?php echo $_GET['id'];?>"></td>
                 
