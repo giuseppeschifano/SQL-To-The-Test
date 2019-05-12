@@ -10,6 +10,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 
+<?php
+session_start();
+?>
+
 
 <?php
 
@@ -56,6 +60,41 @@ if(isset($_POST['update']))
         echo "<p align='center' > <font color='green'>Data changed successfully.";
         echo "<br/> <p align='center' > <a href='index2.php' >View Result</a>";
     }
+
+} 
+
+if((time() - $_SESSION['login_time']) > 300) {
+
+
+    // after 300 seconds inactivity delete user, after 300 sec deactivate user
+    $id = $_GET['id'];
+
+    //deleting the row from table
+    $sql = ( "DELETE FROM users WHERE id=:id");
+    $query = $handler->prepare($sql);
+    $query->execute(array(':id' => $id));
+    
+    //redirecting
+    header("Location:index.php");
+
+         
+
+    } else if((time() - $_SESSION['login_time']) > 90) {
+
+        //updating the table
+
+        $act = 0;
+
+        $sql = "UPDATE users SET active = $act  WHERE id=:id";
+        $query = $handler->prepare($sql);
+        $query->execute();
+
+        header("Location:index.php");
+        echo '<script language="javascript">';
+        echo 'alert(Your user-id will be deactivated in 90 sec / deleted in 5 min !! )';
+        echo '</script>';
+        exit;
+
 }
 
 

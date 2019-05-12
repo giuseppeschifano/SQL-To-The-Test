@@ -10,6 +10,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 
+<?php
+session_start();
+?>
+
 
 <?php
 
@@ -20,7 +24,7 @@ if(isset($_POST['update']))
     $first=$_POST['firstname'];
     $last=$_POST['lastname'];  
     $email=$_POST['emailaddress'];
-      
+    $act=$_POST['active'];
 
     // checking empty fields
     if(empty($user) || empty($first) || empty($last)) {    
@@ -39,7 +43,7 @@ if(isset($_POST['update']))
 
         //updating the table
 
-        $sql = "UPDATE users SET username=:username, firstname=:firstname, lastname=:lastname, emailaddress=:emailaddress  WHERE id=:id";
+        $sql = "UPDATE users SET username=:username, firstname=:firstname, lastname=:lastname, emailaddress=:emailaddress, active=:active  WHERE id=:id";
         
         $query = $handler->prepare($sql);
                 
@@ -48,6 +52,7 @@ if(isset($_POST['update']))
         $query->bindparam(':firstname', $first);
         $query->bindparam(':lastname', $last);
         $query->bindparam(':emailaddress', $email);
+        $query->bindparam(':active', $act);
 
         $query->execute();
     
@@ -55,6 +60,41 @@ if(isset($_POST['update']))
         echo "<p align='center' > <font color='green'>Data changed successfully.";
         echo "<br/> <p align='center' > <a href='index2.php' >View Result</a>";
     }
+
+} 
+
+if((time() - $_SESSION['login_time']) > 300) {
+
+
+    // after 300 seconds inactivity delete user, after 300 sec deactivate user
+    $id = $_GET['id'];
+
+    //deleting the row from table
+    $sql = ( "DELETE FROM users WHERE id=:id");
+    $query = $handler->prepare($sql);
+    $query->execute(array(':id' => $id));
+    
+    //redirecting
+    header("Location:index.php");
+
+         
+
+    } else if((time() - $_SESSION['login_time']) > 90) {
+
+        //updating the table
+
+        $act = 0;
+
+        $sql = "UPDATE users SET active = $act  WHERE id=:id";
+        $query = $handler->prepare($sql);
+        $query->execute();
+
+        header("Location:index.php");
+        echo '<script language="javascript">';
+        echo 'alert(Your user-id will be deactivated in 90 sec / deleted in 5 min !! )';
+        echo '</script>';
+        exit;
+
 }
 
 
@@ -69,8 +109,6 @@ if(isset($_GET['id'])) {
 
 $sql = "SELECT * FROM users WHERE id=:id";
 $query = $handler->prepare($sql);
-
-
 $query->execute(array(':id' => $id));
 
 while($row = $query->fetch(PDO::FETCH_ASSOC))
@@ -80,6 +118,7 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
     $first = $row['firstname'];
     $last = $row['lastname'];
     $email = $row['emailaddress'];
+    $act = $row['active'];
 }
 ?>
 
@@ -87,17 +126,19 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="extra.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Account.PHP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <title>Account.PHP</title>
+
 </head>
 <body>
 
@@ -126,21 +167,26 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
                 bg-light" value="<?php echo $id;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">username</td>
+                <td class="bg-light pl-2">username</td>
                 <td><input type="text" name="username" value="<?php echo $user;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">firstname</td>
+                <td class="bg-light pl-2">firstname</td>
                 <td><input type="text" name="firstname" value="<?php echo $first;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">lastname</td>
+                <td class="bg-light pl-2">lastname</td>
                 <td><input type="text" name="lastname" value="<?php echo $last;?>"></td>
             </tr>
             <tr> 
-                <td class="bg-warning pl-2">e-mail addres</td>
+                <td class="bg-light pl-2">e-mail addres</td>
                 <td><input type="text" name="emailaddress" value="<?php echo $email;?>"></td>
             </tr>
+            <tr> 
+                <td class="bg-light pl-2">active 0/1</td>
+                <td><input type="tinyint" name="active" value="<?php echo $act;?>"></td>
+            </tr>
+
             <tr>
                 <td><input type="hidden" name="id" value="<?php echo $_GET['id'];?>"></td>
                 

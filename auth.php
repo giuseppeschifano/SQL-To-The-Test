@@ -13,6 +13,10 @@ error_reporting(E_ALL);
 // Start the session parametersxz
 session_start();
 
+	$_SESSION['login_time'] = time();
+
+// die(print_r($_SESSION));
+
 	$myusername = $_POST['user'];
 	$mypassword = $_POST['pass'];
 	

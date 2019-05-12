@@ -1,0 +1,27 @@
+
+$dark-color: darkslategrey;
+$light-color:  lightblue;
+
+body.dark-mode {
+    background-color: $dark-color;
+}
+
+body.light-mode {
+    background-color: $light-color;
+}
+
+h3 {
+    color: white;
+    text-align: center;
+}
+
+
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+
+.main-form {
+    margin: auto;
+}
+

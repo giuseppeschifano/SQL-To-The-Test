@@ -79,30 +79,35 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="extra.css"/>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Password_PHP</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="extra.css"/>
+
+    <title>Password_PHP</title>
+
 </head>
 
 <body>
    
 <div class="container-fluid bg-primary">
-<h3> PASSWORD PAGE </h3>
+    <h3> PASSWORD PAGE </h3>
 
-<?php
-	if (isset($_SESSION['login_user'])) {
-	echo "<p align='center' > <font color='white' size='4pt'>changing password for username " . $_SESSION['login_user'] . " - idnr " . $_SESSION['id_user'] . "<br>";
-	}
-?>
+    <?php
+        if (isset($_SESSION['login_user'])) {
+        echo "<p align='center' > <font color='black' size='3pt'>changing password for username " . $_SESSION['login_user'] . " - idnr " . $_SESSION['id_user'] . "<br>";
+        }
+    ?>
 
-<br>
+    <br>
 </div>
 
 <div class="hero">
@@ -120,37 +125,36 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
         <table class="table-bordered">
         
             <tr> 
-                <td class="bg-success pl-2 ">id</td>
+                <td class="bg-light pl-2 ">id</td>
                 <td><input type="text" name="id" readonly class="form-control-plaintext  
-                bg-success pl-2" value="<?php echo $id;?>"></td>
+                bg-light pl-2" value="<?php echo $id;?>"></td>
             </tr>
 
             <tr> 
-                <td class="bg-success pl-2">username</td>
+                <td class="bg-light pl-2">username</td>
                 <td><input type="text" name="username" readonly class="form-control-plaintext  
-                bg-success pl-2" value="<?php echo $user;?>"></td>
+                bg-light pl-2" value="<?php echo $user;?>"></td>
             </tr>
 
             <tr> 
-                <td class="bg-warning pl-2">password</td>
+                <td class="bg-light pl-2">password</td>
                 <td><input type="password" class="bg-warning pl-2" name="newpass" value=""></td>
             </tr>
 
             <tr> 
-                <td class="bg-warning pl-2">password</td>
+                <td class="bg-light pl-2">password</td>
                 <td><input type="password" class="bg-warning pl-2" name="newconf" value=""></td>
             </tr>
 
         </table>
-
 
         <div class="form-group m-2 ">
         <input type="submit" name="update" value="UPDATE" class="btn btn-primary"/>
         </div>
         
         </form>
-    </div>
 
+    </div>
 </div>
 
 </body>

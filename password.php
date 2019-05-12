@@ -103,7 +103,7 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
 
     <?php
         if (isset($_SESSION['login_user'])) {
-        echo "<p align='center' > <font color='white' size='4pt'>changing password for username " . $_SESSION['login_user'] . " - idnr " . $_SESSION['id_user'] . "<br>";
+        echo "<p align='center' > <font color='black' size='3pt'>changing password for username " . $_SESSION['login_user'] . " - idnr " . $_SESSION['id_user'] . "<br>";
         }
     ?>
 
@@ -125,24 +125,24 @@ while($row = $query->fetch(PDO::FETCH_ASSOC)){
         <table class="table-bordered">
         
             <tr> 
-                <td class="bg-success pl-2 ">id</td>
+                <td class="bg-light pl-2 ">id</td>
                 <td><input type="text" name="id" readonly class="form-control-plaintext  
-                bg-success pl-2" value="<?php echo $id;?>"></td>
+                bg-light pl-2" value="<?php echo $id;?>"></td>
             </tr>
 
             <tr> 
-                <td class="bg-success pl-2">username</td>
+                <td class="bg-light pl-2">username</td>
                 <td><input type="text" name="username" readonly class="form-control-plaintext  
-                bg-success pl-2" value="<?php echo $user;?>"></td>
+                bg-light pl-2" value="<?php echo $user;?>"></td>
             </tr>
 
             <tr> 
-                <td class="bg-warning pl-2">password</td>
+                <td class="bg-light pl-2">password</td>
                 <td><input type="password" class="bg-warning pl-2" name="newpass" value=""></td>
             </tr>
 
             <tr> 
-                <td class="bg-warning pl-2">password</td>
+                <td class="bg-light pl-2">password</td>
                 <td><input type="password" class="bg-warning pl-2" name="newconf" value=""></td>
             </tr>
 

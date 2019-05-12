@@ -17,7 +17,7 @@ $id = $_SESSION['id_user'];
 
 <?php
 	if(!isset($_COOKIE['loggedin'])){
-		header("location:home.php");
+		header("location:settings.php");
 	}
 ?>
 
@@ -25,16 +25,21 @@ $id = $_SESSION['id_user'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="extra.css"/>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register_PHP</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+
+	<link rel="stylesheet" href="extra.css"/>
+	
+	<title>Register_PHP</title>
+	
 </head>
 
 <body>
@@ -44,7 +49,7 @@ $id = $_SESSION['id_user'];
 
 <?php
 	if (isset($_SESSION['login_user'])) {
-		echo "<p align='center' > <font color='orange' size='5pt'>Welcome, " . $_SESSION['login_user'] . "<br>";
+	echo "<p align='center' > <font color='orange' size='5pt' weight:'bolder' >Welcome, " . $_SESSION['login_user'] . "<br>";
 	}
 ?>
 
@@ -55,27 +60,20 @@ $id = $_SESSION['id_user'];
 
 		<br>
 		<a href="index.php" class="btn btn-secondary ml-5" role="button" >GO BACK</a>
-		<br>
-		<hr/>
 
-		<div class="row d-flex flex-column align-items-center">
-			<div class="form-group m-3">
-				<a href="index2.php"  class="btn btn-success" role="button">OPEN APPLICATION</a>
-			</div>
-		</div>
+		<a href="index2.php"  class="btn btn-success" role="button">GO TO USERS PAGE</a>
 
-		<!-- FOUT: om session parameter door te geven, geen <div> maar echo...!! -->
-			<!-- <div class="row d-flex flex-column align-items-center">
-				<div class="form-group m-3">
-					<a href="password.php?"  class="btn btn-primary" role="button">CHANGE PASSWORD</a>
-				</div>
-			</div> -->
+		<!--  om session parameters door te geven, geen <div> gebruiken maar echo...!! -->
 
-		<br>
+		<?php
 
-<?php
-		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:5px' class='btn btn-warning form-control col-2 m-5' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
-?>
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-warning form-control col-2 m-2' href=\"settings.php?id=$id\">GO TO SETTINGS</a>";
+
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-secondary form-control col-2 m-2' href=\"profile.php?id=$id\">GO TO PROFILE PAGE</a>";
+
+		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-danger form-control col-2 m-2' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
+
+		?>
 
 		<br>
 

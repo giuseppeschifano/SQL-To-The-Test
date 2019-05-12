@@ -88,12 +88,6 @@ session_destroy();
         <input type="password" class="form-control" name="pass" />
         </div>
 
-        <!-- <div class="input-group col-4 m-3">
-        <div class="input-group-prepend">
-        <button class="btn btn-success" type="button">New PWD</button>
-        </div>
-        <input type="password" class="form-control" name="chgpwd" />
-        </div> -->
         
         <div class="form-group m-3"> 
         <label for="formGroupExampleInput"></label>
