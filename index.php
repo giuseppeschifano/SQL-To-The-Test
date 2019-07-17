@@ -13,6 +13,11 @@ error_reporting(E_ALL);
 session_start();
 ?>
 
+<?php
+    echo "<h5 align='center' class='alert-info  p-3'><font color='secondary' >IF YOU ALREADY HAVE AN ACCOUNT <span class='text-primary'>SIGN IN,</span> ELSE <span class='text-primary'>SIGN UP</span></font><br><br/>";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +30,7 @@ session_start();
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 
     <link rel="stylesheet" href="extra.css"/>
     
@@ -37,13 +42,13 @@ session_start();
 
 <?php
 if (isset($_SESSION['errorPWD'])) {
-echo "<p align='center' > <font color='red' size='4pt'>ERROR: " . $_SESSION['errorPWD'] . "<br>";    
+echo "<p align='center' class='alert-info  p-3' > <font color='red' size='4pt'>ERROR: " . $_SESSION['errorPWD'] . "<br>";    
 }
 ?>
 
 <?php
 if (isset($_SESSION['errorUSER'])) {
-echo "<p align='center' > <font color='red' size='4pt'>ERROR: " . $_SESSION['errorUSER'] . "<br>";
+echo "<p align='center' class='alert-info  p-3' > <font color='red' size='4pt'>ERROR: " . $_SESSION['errorUSER'] . "<br>";
 }
 ?>
 
@@ -55,26 +60,22 @@ session_unset();
 session_destroy(); 
 ?>
 
-<div class="container-fluid bg-primary">
-    
-    <h3>START PAGE</h3>
-
-    <h5 class="text-center text-warning font-weight-bolder" >- - - If you already have an account SIGN IN, else SIGN UP - - -</h5>
+<div class="container-fluid bg-primary text-white p-2">
+    <h4>START PAGE</h4>
     
     <div class="d-flex flex-column align-items-end mr-5">
-        <a href="register2.php" class="btn btn-light " role="button">SIGN UP</a>
+        <a href="register2.php" class="justify-content-end mr-5 btn btn-light " role="button">SIGN UP</a>
     </div>
-    
-    <br>
+
 </div>
 
-<div class="hero"> 
 
+<div class="hero"> 
 <div class="row d-flex flex-column">
 
     <form action="auth.php" method="POST" class = "d-flex flex-column align-items-center">
 
-        <div class="input-group col-4 m-4">
+        <div class="input-group col-4 pt-4 m-4">
         <div class="input-group-prepend">
         <button class="btn btn-success" type="button">Username</button>
         </div>
@@ -101,7 +102,7 @@ session_destroy();
 
     <div id="bodyDL" class="d-flex flex-column align-items-center ">
     <br>
-    <button class="btn btn-danger" onclick="myColorBody()">&#x262F;</button>
+    <button class="btn btn-danger mb-4" onclick="myColorBody()">&#x262F;</button>
     </div>
 
     <!--Bootstrap & Jquery scripts-->
@@ -115,7 +116,7 @@ session_destroy();
     <!--Axios script-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <!--Your script-->
+    <!--Your scripts: dark - light mode-->
     <script src="script.js"></script>
 
 </body>

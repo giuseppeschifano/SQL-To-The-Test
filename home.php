@@ -15,11 +15,11 @@ $name = $_SESSION['login_user'];
 $id = $_SESSION['id_user'];
 ?>
 
-<?php
-	if(!isset($_COOKIE['loggedin'])){
-		header("location:settings.php");
-	}
-?>
+
+	<!-- if(!isset($_COOKIE['loggedin'])){
+		header("location:index2.php");
+	} -->
+
 
 
 <!DOCTYPE html>
@@ -33,51 +33,57 @@ $id = $_SESSION['id_user'];
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+
 
 	<link rel="stylesheet" href="extra.css"/>
 	
-	<title>Register_PHP</title>
+	<title>Home.PHP</title>
 	
 </head>
-
 <body>
 
-<div class="container-fluid bg-primary">
-<br>
 
-<?php
-	if (isset($_SESSION['login_user'])) {
-	echo "<p align='center' > <font color='orange' size='5pt' weight:'bolder' >Welcome, " . $_SESSION['login_user'] . "<br>";
-	}
-?>
+<div class="container-fluid bg-primary p-2">
+    <h3>HOME PAGE</h3>
+ 
+	<?php
+		if (isset($_SESSION['login_user'])) {
+		echo "<h4 align='center' > <font color='white'  weight:'bolder' >Welcome, " . $_SESSION['login_user'] . "<br>";
+		}
+	?>
 
-<br>
 </div>
 
-	<div class="hero">
 
-		<br>
-		<a href="index.php" class="btn btn-secondary ml-5" role="button" >GO BACK</a>
+<div class="hero bg-secondary">
 
-		<a href="index2.php"  class="btn btn-success" role="button">GO TO USERS PAGE</a>
+	<br>
+	<a href="index.php" class="btn btn-light ml-5" role="button" >GO BACK</a>
+	<br>
+	<hr class="bg-white">
 
-		<!--  om session parameters door te geven, geen <div> gebruiken maar echo...!! -->
 
-		<?php
+	<!--  om session parameters door te geven, geen <div> gebruiken maar echo...!! -->
 
-		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-warning form-control col-2 m-2' href=\"settings.php?id=$id\">GO TO SETTINGS</a>";
 
-		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-secondary form-control col-2 m-2' href=\"profile.php?id=$id\">GO TO PROFILE PAGE</a>";
+	<?php
 
-		echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-danger form-control col-2 m-2' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
+	echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-success form-control col-2 m-2' href=\"index2.php\">GO TO USERS PAGE</a>";
 
-		?>
+	echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-primary form-control col-2 m-2' href=\"index3.php\">GO TO ADDRESS PAGE</a>";
 
-		<br>
+	echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-warning form-control col-2 m-2' href=\"settings.php?id=$id\">GO TO SETTINGS PAGE</a>";
 
-	</div>
+	echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-info form-control col-2 m-2' href=\"profile.php?id=$id\">GO TO PROFILE PAGE</a>";
+
+	echo "<p align='center' > <font color='white' size='3pt'><a input type='button' style='margin:2px' class='btn btn-danger form-control col-2 m-2 mb-5' href=\"password.php?id=$id\">CHANGE PASSWORD</a>";
+
+	?>
+
+	<br>
+
+</div>
 
 
 </body>

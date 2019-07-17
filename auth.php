@@ -10,12 +10,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-// Start the session parametersxz
+// Start the session parameters
+
 session_start();
 
 	$_SESSION['login_time'] = time();
 
-// die(print_r($_SESSION));
+	// die(print_r($_SESSION));
 
 	$myusername = $_POST['user'];
 	$mypassword = $_POST['pass'];
@@ -39,8 +40,8 @@ session_start();
 
 			if (password_verify($mypassword, $hashed_password)) {
 
-				$seconds = 5 + time();
-				setcookie(loggedin, date("F jS - g:i a"), $seconds);
+				// $seconds = 5 + time();
+				// setcookie(loggedin, date("F jS - g:i a"), $seconds);
 
 				$_SESSION['login_user']=$myusername;
 				header("location:home.php");
